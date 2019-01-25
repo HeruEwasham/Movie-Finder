@@ -1,0 +1,16 @@
+PODS:
+  - TMDBSwift (0.5.1)
+
+DEPENDENCIES:
+  - TMDBSwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - TMDBSwift
+
+SPEC CHECKSUMS:
+  TMDBSwift: 9220f3dcee23372c05b92f8c111f5f4c37185aee
+
+PODFILE CHECKSUM: 9a879756bba866253771c1ccbca10862e6787b0b
+
+COCOAPODS: 1.5.3
