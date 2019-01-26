@@ -21,7 +21,27 @@ class SettingsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Show current textual language:
+        let currentLanguageText = getLanguageText()
+        // Sometimes name is not set, only english-name is set, so format it around that:
+        if currentLanguageText.name != "" {
+            self.textLanguageButton.setTitle("Language (text): " + currentLanguageText.name + " (" + currentLanguageText.english_name + ")", for: .normal)
+        }
+        else {
+            self.textLanguageButton.setTitle("Language (text): " + currentLanguageText.english_name, for: .normal)
+        }
         
+        // Show current video language:
+        let currentLanguageVideo = getLanguageVideo()
+        // Sometimes name is not set, only english-name is set, so format it around that:
+        if currentLanguageVideo.name != "" {
+            self.viodoLanguageButton.setTitle("Language (video): " + currentLanguageVideo.name + " (" + currentLanguageVideo.english_name + ")", for: .normal)
+        }
+        else {
+            self.viodoLanguageButton.setTitle("Language (video): " + currentLanguageVideo.english_name, for: .normal)
+        }
+        
+        // Get languages TMDB use (is not implemented in library, so this we do "manually"):
         HTTPGetJSON(url: "https://api.themoviedb.org/3/configuration/languages?api_key=" + apiKeyTMDB()) { (err, result) in
             if(err != nil){
                 print(err!.localizedDescription)
@@ -42,7 +62,6 @@ class SettingsController: UIViewController {
                     else {
                         self.languageDropDownText.append(i.english_name)
                     }
-                    
                 }
             }
             catch {
@@ -53,7 +72,7 @@ class SettingsController: UIViewController {
     
     
     @IBAction func chooseTextLanguage(_ sender: Any) {
-        // Code of dropdown based on the example-code: https://cocoapods.org/pods/DropDown
+        // Code of dropdown based on the example-code here: https://cocoapods.org/pods/DropDown
         let dropDown = DropDown()
         
         // The view to which the drop down will appear on
@@ -61,18 +80,29 @@ class SettingsController: UIViewController {
         
         // Action triggered on selection (ie. show video)
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.textLanguageButton.titleLabel!.text = "Language (text): " + item
-            // Decode language json to language object:
-            let data = try JSONEncoder().encode(self.languages[index])
-            UserDefaults.standard.set(data, forKey: "textLanguage")     // Save new userdefault
-            } as? SelectionClosure
+            self.textLanguageButton.setTitle("Language (text): " + item, for: .normal)
+            setLanguageText(language: self.languages[index])
+            }
         
         dropDown.dataSource = languageDropDownText            // Set what shall be shown
         dropDown.show()                                 // Show dropdown.
     }
     
     @IBAction func chooseVideoLanguage(_ sender: Any) {
+        // Code of dropdown based on the example-code here: https://cocoapods.org/pods/DropDown
+        let dropDown = DropDown()
         
+        // The view to which the drop down will appear on
+        dropDown.anchorView = viodoLanguageButton // UIView or UIBarButtonItem
+        
+        // Action triggered on selection (ie. show video)
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.viodoLanguageButton.setTitle("Language (video): " + item, for: .normal)
+            setLanguageVideo(language: self.languages[index])
+        }
+        
+        dropDown.dataSource = languageDropDownText            // Set what shall be shown
+        dropDown.show()
     }
     
 }

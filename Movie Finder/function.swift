@@ -91,8 +91,8 @@ func getLanguageText() -> Language {
  */
 func getLanguageVideo() -> Language {
     var language: Language = Language(iso_639_1: "en", english_name: "English", name: "English")
-    if UserDefaults.standard.data(forKey: "languageText") != nil {
-        let data  = UserDefaults.standard.data(forKey: "languageText")
+    if UserDefaults.standard.data(forKey: "videoLanguage") != nil {
+        let data  = UserDefaults.standard.data(forKey: "videoLanguage")
         
         let jsonDecoder = JSONDecoder()
         language = try! jsonDecoder.decode(Language.self, from: data!)
@@ -102,7 +102,17 @@ func getLanguageVideo() -> Language {
 
 
 
+func setLanguageText(language: Language) {
+    // Decode language json to language object:
+    let data = try? JSONEncoder().encode(language)
+    UserDefaults.standard.set(data, forKey: "textLanguage")     // Save new userdefault
+}
 
+func setLanguageVideo(language: Language) {
+    // Decode language json to language object:
+    let data = try? JSONEncoder().encode(language)
+    UserDefaults.standard.set(data, forKey: "videoLanguage")     // Save new userdefault
+}
 
 
 

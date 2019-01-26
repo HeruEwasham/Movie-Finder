@@ -23,11 +23,15 @@ class MovieDetailsController: UIViewController {
     @IBOutlet weak var originalTitle: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var backdropImage: UIImageView!
     @IBOutlet weak var genresLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var productionCompaniesLabel: UILabel!
     @IBOutlet weak var videoButton: UIButton!
     @IBOutlet weak var hompageButton: UIButton!
+    @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak var originalLanguageLabel: UILabel!
+    @IBOutlet weak var productionCountriesLabel: UILabel!
     
     
     // MARK: Code
@@ -61,9 +65,19 @@ class MovieDetailsController: UIViewController {
                         self.descLabel.text = ""
                     }
                     
+                    // Set poster-image:
                     if movie.poster_path != nil {
                         getImage(imagePath: movie.poster_path!, completionHandler: {(image) in
                             self.posterImage.image = image
+                        })
+                    }
+                    
+                    // Set backdrop-image:
+                    if movie.backdrop_path != nil {
+                        print("Backdrop shall be set with id " + movie.backdrop_path!)
+                        getImage(imagePath: movie.backdrop_path!, completionHandler: {(image) in
+                            print("Backdrop will be set")
+                            self.backdropImage.image = image
                         })
                     }
                     
@@ -84,15 +98,29 @@ class MovieDetailsController: UIViewController {
                     self.genresLabel.text = genres
                     
                     if movie.release_date != nil {
-                        self.releaseDateLabel.text = movie.release_date
+                        self.releaseDateLabel.text = "Release date: " + movie.release_date!
                     }
                     else {
                         self.releaseDateLabel.text = ""
                     }
                     
+                    if movie.original_language != nil {
+                        self.originalLanguageLabel.text = "Original language: " + movie.original_language!
+                    }
+                    else {
+                        self.originalLanguageLabel.text = ""
+                    }
+                    
+                    if movie.runtime != nil {
+                        self.runtimeLabel.text = "Runtime: " + String(movie.runtime!) + " min"
+                    }
+                    else {
+                        self.runtimeLabel.text = ""
+                    }
+                    
                     var productionCompanies = ""
                     if movie.production_companies != nil {
-                        productionCompanies += "Production Companies: "
+                        productionCompanies += "Production companies: "
                         for i in 0..<movie.production_companies!.count {
                             if movie.production_companies![i].name != nil {
                                 // If not first company, add a ", ":
@@ -104,6 +132,21 @@ class MovieDetailsController: UIViewController {
                         }
                     }
                     self.productionCompaniesLabel.text = productionCompanies
+                    
+                    var productionCountries = ""
+                    if movie.production_countries != nil {
+                        productionCountries += "Production countries: "
+                        for i in 0..<movie.production_countries!.count {
+                            if movie.production_countries![i].name != nil {
+                                // If not first country, add a ", ":
+                                if i > 0 {
+                                    productionCountries += ", "
+                                }
+                                productionCountries += movie.production_countries![i].name!
+                            }
+                        }
+                    }
+                    self.productionCountriesLabel.text = productionCountries
                     
                     // If movie.video seems to not work, so this is my workaround:
                     MovieMDB.videos(movieID: movie.id, language: getLanguageVideo().iso_639_1){
