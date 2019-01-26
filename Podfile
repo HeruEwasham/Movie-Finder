@@ -8,6 +8,8 @@ target 'Movie Finder' do
   # Pods for Movie Finder
 
   pod "TMDBSwift"
+  pod 'DropDown'
+  pod "YoutubePlayer-in-WKWebView", "~> 0.2.0" 
 
   target 'Movie FinderUITests' do
     inherit! :search_paths

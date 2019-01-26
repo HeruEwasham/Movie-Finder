@@ -23,7 +23,7 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTMDBApiKey()
+        TMDBConfig.apikey = apiKeyTMDB()
         // Do any additional setup after loading the view, typically from a nib.
         searchBar.delegate = self
     }
@@ -51,7 +51,7 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
     // Search for every inputted character:
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        SearchMDB.movie(query: searchText, language: "en", page: 1, includeAdult: true, year: nil, primaryReleaseYear: nil){
+        SearchMDB.movie(query: searchText, language: getLanguageText().iso_639_1, page: 1, includeAdult: true, year: nil, primaryReleaseYear: nil){
             data, movies in
             if (movies != nil) {
                 if(movies!.count == 0){
@@ -75,7 +75,7 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
         if (segue.identifier == "showMovieDetails") {
             let secondViewController = segue.destination as! MovieDetailsController
             let index = sender as! IndexPath
-            secondViewController.movie = movies[index.row]
+            secondViewController.id = movies[index.row].id
         }
     }
     

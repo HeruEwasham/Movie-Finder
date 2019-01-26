@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "10DDD6BAAA984DD57850BDCEAC5980DE"
-               BuildableName = "Pods_Movie_Finder.framework"
-               BlueprintName = "Pods-Movie Finder"
+               BlueprintIdentifier = "7420925A298ACC76C5C85B9B4658AEB8"
+               BuildableName = "YoutubePlayer_in_WKWebView.framework"
+               BlueprintName = "YoutubePlayer-in-WKWebView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "10DDD6BAAA984DD57850BDCEAC5980DE"
-            BuildableName = "Pods_Movie_Finder.framework"
-            BlueprintName = "Pods-Movie Finder"
+            BlueprintIdentifier = "7420925A298ACC76C5C85B9B4658AEB8"
+            BuildableName = "YoutubePlayer_in_WKWebView.framework"
+            BlueprintName = "YoutubePlayer-in-WKWebView"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

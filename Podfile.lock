@@ -1,16 +1,24 @@
 PODS:
+  - DropDown (2.3.12)
   - TMDBSwift (0.5.1)
+  - YoutubePlayer-in-WKWebView (0.2.5)
 
 DEPENDENCIES:
+  - DropDown
   - TMDBSwift
+  - YoutubePlayer-in-WKWebView (~> 0.2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DropDown
     - TMDBSwift
+    - YoutubePlayer-in-WKWebView
 
 SPEC CHECKSUMS:
+  DropDown: 0bcc278799ec11a3d34ce1aac9367fbbaf5423d9
   TMDBSwift: 9220f3dcee23372c05b92f8c111f5f4c37185aee
+  YoutubePlayer-in-WKWebView: 4dad12b3ece938a6456fa4374df78942f88b485a
 
-PODFILE CHECKSUM: 9a879756bba866253771c1ccbca10862e6787b0b
+PODFILE CHECKSUM: c9d0229514aac928dc5116b611d9931cb2bbc3f4
 
 COCOAPODS: 1.5.3

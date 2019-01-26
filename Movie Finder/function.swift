@@ -9,6 +9,7 @@
 import Foundation
 import TMDBSwift
 import UIKit
+import CoreData
 
 
 // Function based on code from: https://stackoverflow.com/questions/39813497/swift-3-display-image-from-url/46788201
@@ -46,6 +47,58 @@ func getImage(imagePath: String, completionHandler: @escaping (UIImage?) -> ()) 
 }
 
 
+//Method just to execute request, assuming the response type is string (and not file)
+func HTTPsendRequest(request: URLRequest,
+                     callback: @escaping (Error?, Data?) -> Void) {
+    let task = URLSession.shared.dataTask(with: request) { (data, res, err) in
+        if (err != nil) {
+            callback(err,nil)
+        } else {
+            callback(nil, data)
+        }
+    }
+    task.resume()
+}
+
+// post JSON
+func HTTPGetJSON(url: String,
+                  callback: @escaping (Error?, Data?) -> Void) {
+    
+    var request = URLRequest(url: URL(string: url)!)
+    
+    request.httpMethod = "GET"
+    request.addValue("application/json",forHTTPHeaderField: "Content-Type")
+    request.addValue("application/json",forHTTPHeaderField: "Accept")
+    HTTPsendRequest(request: request, callback: callback)
+}
+
+/**
+ Returns userdefault for the text language or a hardcoded default.
+ */
+func getLanguageText() -> Language {
+    var language: Language = Language(iso_639_1: "en", english_name: "English", name: "English")
+    if UserDefaults.standard.data(forKey: "textLanguage") != nil {
+        let data  = UserDefaults.standard.data(forKey: "textLanguage")
+        
+        let jsonDecoder = JSONDecoder()
+        language = try! jsonDecoder.decode(Language.self, from: data!)
+    }
+    return language
+}
+
+/**
+ Returns userdefault for the video language or a hardcoded default.
+ */
+func getLanguageVideo() -> Language {
+    var language: Language = Language(iso_639_1: "en", english_name: "English", name: "English")
+    if UserDefaults.standard.data(forKey: "languageText") != nil {
+        let data  = UserDefaults.standard.data(forKey: "languageText")
+        
+        let jsonDecoder = JSONDecoder()
+        language = try! jsonDecoder.decode(Language.self, from: data!)
+    }
+    return language
+}
 
 
 
@@ -64,11 +117,6 @@ func getImage(imagePath: String, completionHandler: @escaping (UIImage?) -> ()) 
 
 
 
-
-
-
-
-
-func setTMDBApiKey() {
-    //TMDBConfig.apikey = "Your API Key"
+func apiKeyTMDB() -> String {
+    return "Your api-key"
 }

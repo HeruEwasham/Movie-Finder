@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		576BF74721FC859D0049A439 /* ShowVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576BF74621FC859D0049A439 /* ShowVideoController.swift */; };
+		576BF74921FC96670049A439 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576BF74821FC96670049A439 /* Language.swift */; };
+		576BF74D21FC9CB20049A439 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576BF74C21FC9CB20049A439 /* SettingsController.swift */; };
 		57BA30B721FB71E00071B87D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BA30B621FB71E00071B87D /* AppDelegate.swift */; };
 		57BA30B921FB71E00071B87D /* MovieListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BA30B821FB71E00071B87D /* MovieListTableViewController.swift */; };
 		57BA30BC21FB71E00071B87D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57BA30BA21FB71E00071B87D /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		576BF74621FC859D0049A439 /* ShowVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideoController.swift; sourceTree = "<group>"; };
+		576BF74821FC96670049A439 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		576BF74C21FC9CB20049A439 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		57BA30B321FB71E00071B87D /* Movie Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57BA30B621FB71E00071B87D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57BA30B821FB71E00071B87D /* MovieListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewController.swift; sourceTree = "<group>"; };
@@ -95,10 +101,13 @@
 		57BA30B521FB71E00071B87D /* Movie Finder */ = {
 			isa = PBXGroup;
 			children = (
+				576BF74C21FC9CB20049A439 /* SettingsController.swift */,
+				576BF74621FC859D0049A439 /* ShowVideoController.swift */,
 				57BA30D821FB82510071B87D /* MovieCell.swift */,
 				57BA30B621FB71E00071B87D /* AppDelegate.swift */,
 				57BA30B821FB71E00071B87D /* MovieListTableViewController.swift */,
 				57BA30DA21FB92EA0071B87D /* function.swift */,
+				576BF74821FC96670049A439 /* Language.swift */,
 				57BA30BA21FB71E00071B87D /* Main.storyboard */,
 				57BA30DC21FB9E900071B87D /* MovieDetailsController.swift */,
 				57BA30BD21FB71E20071B87D /* Assets.xcassets */,
@@ -268,13 +277,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Movie Finder/Pods-Movie Finder-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/TMDBSwift/TMDBSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/YoutubePlayer-in-WKWebView/YoutubePlayer_in_WKWebView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TMDBSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YoutubePlayer_in_WKWebView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -310,10 +323,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				576BF74D21FC9CB20049A439 /* SettingsController.swift in Sources */,
 				57BA30B921FB71E00071B87D /* MovieListTableViewController.swift in Sources */,
 				57BA30B721FB71E00071B87D /* AppDelegate.swift in Sources */,
 				57BA30D921FB82510071B87D /* MovieCell.swift in Sources */,
+				576BF74921FC96670049A439 /* Language.swift in Sources */,
 				57BA30DD21FB9E900071B87D /* MovieDetailsController.swift in Sources */,
+				576BF74721FC859D0049A439 /* ShowVideoController.swift in Sources */,
 				57BA30DB21FB92EA0071B87D /* function.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
