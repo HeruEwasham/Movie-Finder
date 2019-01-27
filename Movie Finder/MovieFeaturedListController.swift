@@ -26,16 +26,12 @@ class MovieFeaturedListController: UITableViewController {
         TMDBConfig.apikey = apiKeyTMDB()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // Basic discover query
+        // Get featured movies:
         DiscoverMDB.discover(discoverType: .movie, language: getLanguageText().iso_639_1, page: 1){
             data, movie, tv in
             if let discoveredMovies = movie{
-                self.movies = discoveredMovies
-                print(discoveredMovies[0].title)
-                print(discoveredMovies[0].overview)
-                print(discoveredMovies[0].popularity)
-                print("Number of movies: " + String(self.movies.count))
-                self.tableView.reloadData()
+                self.movies = discoveredMovies      // Save to variable that can be acessed by tableview
+                self.tableView.reloadData()         // Reload tableview
             }
         }
     }

@@ -15,6 +15,7 @@ class SettingsController: UIViewController {
     
     @IBOutlet weak var textLanguageButton: UIButton!
     @IBOutlet weak var viodoLanguageButton: UIButton!
+    @IBOutlet weak var showBackdropSwitch: UISwitch!
     
     var languages: [Language] = []
     var languageDropDownText: [String] = []
@@ -40,6 +41,8 @@ class SettingsController: UIViewController {
         else {
             self.viodoLanguageButton.setTitle("Language (video): " + currentLanguageVideo.english_name, for: .normal)
         }
+        
+        showBackdropSwitch.isOn = showBackdrop()        // Set switch to be as the user preferred
         
         // Get languages TMDB use (is not implemented in library, so this we do "manually"):
         HTTPGetJSON(url: "https://api.themoviedb.org/3/configuration/languages?api_key=" + apiKeyTMDB()) { (err, result) in
@@ -103,6 +106,11 @@ class SettingsController: UIViewController {
         
         dropDown.dataSource = languageDropDownText            // Set what shall be shown
         dropDown.show()
+    }
+    
+    // Called when user change setting on calling backdrop
+    @IBAction func changeBackdrop(_ backdropSwitch: UISwitch) {
+        setBackdrop(show: backdropSwitch.isOn)
     }
     
 }

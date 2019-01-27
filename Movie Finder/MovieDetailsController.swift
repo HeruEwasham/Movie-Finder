@@ -72,11 +72,10 @@ class MovieDetailsController: UIViewController {
                         })
                     }
                     
-                    // Set backdrop-image:
-                    if movie.backdrop_path != nil {
-                        print("Backdrop shall be set with id " + movie.backdrop_path!)
+                    // Set backdrop-image if backdrop exist and user will see it:
+                    print("Backdrop is shown in details page: " + String(showBackdrop()))
+                    if movie.backdrop_path != nil && showBackdrop() {
                         getImage(imagePath: movie.backdrop_path!, completionHandler: {(image) in
-                            print("Backdrop will be set")
                             self.backdropImage.image = image
                         })
                     }

@@ -100,21 +100,41 @@ func getLanguageVideo() -> Language {
     return language
 }
 
+/**
+ Returns if user wents a backdrop or not (default is true).
+ */
+func showBackdrop() -> Bool {
+    var show: Bool = true;
+    if UserDefaults.standard.object(forKey: "showBackdrop") != nil {
+        show = UserDefaults.standard.bool(forKey: "showBackdrop")
+    }
+    return show
+}
 
-
+/**
+ Save the language we shall show text in (currently only changes the text gotten from api)
+ */
 func setLanguageText(language: Language) {
     // Decode language json to language object:
     let data = try? JSONEncoder().encode(language)
-    UserDefaults.standard.set(data, forKey: "textLanguage")     // Save new userdefault
+    UserDefaults.standard.set(data, forKey: "textLanguage")     // Save userdefault
 }
 
+/**
+ Save the language we shall show videos in
+ */
 func setLanguageVideo(language: Language) {
     // Decode language json to language object:
     let data = try? JSONEncoder().encode(language)
-    UserDefaults.standard.set(data, forKey: "videoLanguage")     // Save new userdefault
+    UserDefaults.standard.set(data, forKey: "videoLanguage")     // Save userdefault
 }
 
-
+/**
+ Save if backdrop shall be shown or not
+ */
+func setBackdrop(show: Bool) {
+    UserDefaults.standard.set(show, forKey: "showBackdrop")     // Save userdefault (is done here so we can do it from many places without needing to set key each time collect all calls to userdefaults togheter)
+}
 
 
 
