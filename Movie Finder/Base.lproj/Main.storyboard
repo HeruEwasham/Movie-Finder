@@ -158,7 +158,7 @@
         <!--Movie Details Controller-->
         <scene sceneID="oCy-tH-3w8">
             <objects>
-                <viewController id="bM5-Pt-iLD" customClass="MovieDetailsController" customModule="Movie_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="movieDetailsController" id="bM5-Pt-iLD" customClass="MovieDetailsController" customModule="Movie_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y8m-KK-p5z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,7 +167,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rCL-0F-dIW">
-                                        <rect key="frame" x="0.0" y="73" width="375" height="514"/>
+                                        <rect key="frame" x="0.0" y="73" width="375" height="544"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ef7-pO-Pc7">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
@@ -261,6 +261,13 @@
                                                     <action selector="openHompage:" destination="bM5-Pt-iLD" eventType="touchUpInside" id="vek-Nk-8ev"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QN-Bb-Lyh">
+                                                <rect key="frame" x="0.0" y="514" width="375" height="30"/>
+                                                <state key="normal" title="Show similar movies"/>
+                                                <connections>
+                                                    <action selector="showSimilarMovies:" destination="bM5-Pt-iLD" eventType="touchUpInside" id="Est-Sz-sn7"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -294,6 +301,7 @@
                         <outlet property="productionCountriesLabel" destination="zsx-fM-TY6" id="vUm-Pz-Qqn"/>
                         <outlet property="releaseDateLabel" destination="Jgk-jU-g1g" id="z2h-yd-mOM"/>
                         <outlet property="runtimeLabel" destination="Tn1-zu-5sr" id="XrE-Zv-vaa"/>
+                        <outlet property="showSimilarMoviesButton" destination="9QN-Bb-Lyh" id="TM7-hp-72G"/>
                         <outlet property="titleLabel" destination="ef6-Py-0NB" id="6bp-5d-PLZ"/>
                         <outlet property="videoButton" destination="fAp-f2-S55" id="CYN-Ei-yuG"/>
                         <segue destination="U0s-iy-Nsn" kind="show" identifier="showVideo" id="5a9-T9-LBH"/>

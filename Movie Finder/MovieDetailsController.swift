@@ -18,6 +18,7 @@ class MovieDetailsController: UIViewController {
     var id: Int?
     var movieInfo: MovieDetailedMDB?
     var videosInfo: [VideosMDB] = []
+    var similarMovies: [MovieMDB] = []
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var originalTitle: UILabel!
@@ -32,6 +33,7 @@ class MovieDetailsController: UIViewController {
     @IBOutlet weak var runtimeLabel: UILabel!
     @IBOutlet weak var originalLanguageLabel: UILabel!
     @IBOutlet weak var productionCountriesLabel: UILabel!
+    @IBOutlet weak var showSimilarMoviesButton: UIButton!
     
     
     // MARK: Code
@@ -147,9 +149,10 @@ class MovieDetailsController: UIViewController {
                     }
                     self.productionCountriesLabel.text = productionCountries
                     
-                    // If movie.video seems to not work, so this is my workaround:
+                    // movie.video seems to not work, so this is my workaround:
                     MovieMDB.videos(movieID: movie.id, language: getLanguageVideo().iso_639_1){
                         apiReturn, videos in
+                        // if videos returned, enable button and add to variable in the view.
                         if let videos = videos{
                             if videos.count > 0 {
                                 self.videoButton.isEnabled = true
@@ -161,6 +164,21 @@ class MovieDetailsController: UIViewController {
                             }
                         }
                     }
+                    
+                    // Get similar movies
+                    MovieMDB.similar(movieID: 334, page: 1, language: getLanguageText().iso_639_1){
+                        data, relatedMovies in
+                        // if movies returned, enable button and add to variable in the view.
+                        if let movie = relatedMovies{
+                            if movie.count > 0 {
+                                self.showSimilarMoviesButton.isEnabled = true
+                            }
+                            for i in movie {
+                                self.similarMovies.append(i)
+                            }
+                        }
+                    }
+                    
                     
                     // If movie.hompage exist, and is not empty string, enable button:
                     if movie.homepage != nil && movie.homepage! != "" {
@@ -175,6 +193,11 @@ class MovieDetailsController: UIViewController {
         if (segue.identifier == "showVideo") {
             let secondViewController = segue.destination as! ShowVideoController
             let id = sender as! String
+            secondViewController.id = id
+        }
+        else if (segue.identifier == "showSimilarMovies") {
+            let secondViewController = segue.destination as! MovieDetailsController
+            let id = sender as! Int
             secondViewController.id = id
         }
     }
@@ -211,4 +234,44 @@ class MovieDetailsController: UIViewController {
         }
     }
     
+    @IBAction func showSimilarMovies(_ sender: Any) {
+        // Code of dropdown based on the example-code: https://cocoapods.org/pods/DropDown
+        let dropDown = DropDown()
+        
+        // The view to which the drop down will appear on
+        dropDown.anchorView = videoButton // UIView or UIBarButtonItem
+        
+        // Action triggered on selection (ie. show info about other movie)
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let similarMovieController = storyBoard.instantiateViewController(withIdentifier: "movieDetailsController") as! MovieDetailsController
+            similarMovieController.id = self.similarMovies[index].id
+            self.navigationController!.pushViewController(similarMovieController, animated: true)
+        }
+        
+        // The list of items to display. Can be changed dynamically
+        var dropDownVideos: [String] = []
+        for i in self.similarMovies {
+            // If release date exist, add it to the text.
+            if i.release_date != nil && i.release_date != "" {
+                // Get year from the release date:
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-mm-dd" // Date format
+                //according to date format your date string
+                guard let date = dateFormatter.date(from: i.release_date!) else {
+                    fatalError()                    // The format should be correct.
+                }
+                
+                // Gotten from: https://coderwall.com/p/b8pz5q/swift-4-current-year-mont-day
+                let calendar = Calendar.current
+                dropDownVideos.append(i.title! + " (" + String(calendar.component(.year, from: date)) + ")")
+            }
+            else {                                      // If release date is not provided, only add title.
+                dropDownVideos.append(i.title!)
+            }
+        }
+        dropDown.dataSource = dropDownVideos            // Set what shall be shown
+        dropDown.show()                                 // Show dropdown.
+    }
 }

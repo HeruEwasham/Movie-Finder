@@ -36,6 +36,7 @@ class MovieSearchCell: UITableViewCell {
         }
         
         if (movie != nil && movie!.release_date != nil && movie!.release_date! != "") {
+            // Get year from release date:
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-mm-dd" // Date format
             //according to date format your date string
