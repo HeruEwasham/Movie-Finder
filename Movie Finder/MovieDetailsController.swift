@@ -251,7 +251,7 @@ class MovieDetailsController: UIViewController {
         }
         
         // The list of items to display. Can be changed dynamically
-        var dropDownVideos: [String] = []
+        var dropDownSimilarMovies: [String] = []
         for i in self.similarMovies {
             // If release date exist, add it to the text.
             if i.release_date != nil && i.release_date != "" {
@@ -265,13 +265,13 @@ class MovieDetailsController: UIViewController {
                 
                 // Gotten from: https://coderwall.com/p/b8pz5q/swift-4-current-year-mont-day
                 let calendar = Calendar.current
-                dropDownVideos.append(i.title! + " (" + String(calendar.component(.year, from: date)) + ")")
+                dropDownSimilarMovies.append(i.title! + " (" + String(calendar.component(.year, from: date)) + ")")
             }
-            else {                                      // If release date is not provided, only add title.
-                dropDownVideos.append(i.title!)
+            else {                                            // If release date is not provided, only add title.
+                dropDownSimilarMovies.append(i.title!)
             }
         }
-        dropDown.dataSource = dropDownVideos            // Set what shall be shown
-        dropDown.show()                                 // Show dropdown.
+        dropDown.dataSource = dropDownSimilarMovies            // Set what shall be shown
+        dropDown.show()                                        // Show dropdown.
     }
 }
