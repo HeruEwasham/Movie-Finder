@@ -38,14 +38,17 @@ class MovieSearchListController: UITableViewController, UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.searchBar.endEditing(true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.searchBar.endEditing(true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.searchBar.endEditing(true)
     }
     
     // Search for every inputted character:
