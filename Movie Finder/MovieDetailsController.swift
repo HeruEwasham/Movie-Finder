@@ -166,7 +166,7 @@ class MovieDetailsController: UIViewController {
                     }
                     
                     // Get similar movies
-                    MovieMDB.similar(movieID: 334, page: 1, language: getLanguageText().iso_639_1){
+                    MovieMDB.similar(movieID: self.id, page: 1, language: getLanguageText().iso_639_1){
                         data, relatedMovies in
                         // if movies returned, enable button and add to variable in the view.
                         if let movie = relatedMovies{
