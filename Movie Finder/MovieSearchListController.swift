@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MovieSearchListController.swift
 //  Movie Finder
 //
 //  Created by Yngve Hestem on 25/01/2019.
@@ -10,7 +10,7 @@ import UIKit
 
 import TMDBSwift
 
-class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
+class MovieSearchListController: UITableViewController, UISearchBarDelegate {
 
     // MARK: Variables:
     
@@ -88,7 +88,7 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieSearchCell
         cell.movie = movies[indexPath.row]
         
         cell.layoutSubviews()

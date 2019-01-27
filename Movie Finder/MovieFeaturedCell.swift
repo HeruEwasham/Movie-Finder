@@ -1,8 +1,8 @@
 //
-//  MovieCell.swift
+//  MovieFeaturedCell.swift
 //  Movie Finder
 //
-//  Created by Yngve Hestem on 25/01/2019.
+//  Created by Yngve Hestem on 27/01/2019.
 //  Copyright © 2019 Yngve Hestem. All rights reserved.
 //
 
@@ -10,10 +10,11 @@ import Foundation
 
 import TMDBSwift
 
-class MovieCell: UITableViewCell {
+class MovieFeaturedCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var ReleaseDateLabel: UILabel!
+    @IBOutlet weak var releaseLabel: UILabel!
+    
     
     var movie: MovieMDB?
     
@@ -45,10 +46,10 @@ class MovieCell: UITableViewCell {
             
             // Gotten from: https://coderwall.com/p/b8pz5q/swift-4-current-year-mont-day
             let calendar = Calendar.current
-            ReleaseDateLabel.text = String(calendar.component(.year, from: date))
+            releaseLabel.text = String(calendar.component(.year, from: date))
         }
         else {
-            ReleaseDateLabel.text = ""
+            releaseLabel.text = ""
         }
     }
 }
